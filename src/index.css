@@ -1,68 +1,264 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --charcoal-blue: #313E50;
+  --twilight-indigo: #3A435E;
+  --slate: #455561;
+  --blue-slate: #5C6672;
+  --slate-grey: #6C6F7F;
+
+  --bg: #F4F5F7;
+  --card-bg: #FFFFFF;
+  --border: #E1E4E8;
+  --text-primary: #1F2530;
+  --text-secondary: #5C6672;
+  --positive: #3F8F6D;
+  --negative: #B5525C;
+
+  font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-primary);
+  background-color: var(--bg);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* ---------- Layout shell ---------- */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+.app-header {
+  background-color: var(--charcoal-blue);
+  color: #fff;
+  padding: 1.75rem 2rem;
+}
+
+.app-header h2 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.app-header p {
+  margin: 0.25rem 0 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.app-content {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* ---------- Add Transaction card ---------- */
+
+.add-transaction-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+
+.add-transaction-card h3 {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.add-transaction-form .form-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.add-transaction-form .field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1 1 150px;
+}
+
+.add-transaction-form label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.add-transaction-form input {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.55rem 0.65rem;
+  font-size: 0.95rem;
   font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  color: var(--text-primary);
+  background-color: #fff;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.add-transaction-form input:focus {
+  outline: none;
+  border-color: var(--slate);
+  box-shadow: 0 0 0 3px rgba(58, 67, 94, 0.15);
+}
+
+.btn-primary {
+  background-color: var(--charcoal-blue);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--twilight-indigo);
+}
+
+.btn-primary:focus-visible {
+  outline: 3px solid var(--slate);
+  outline-offset: 2px;
+}
+
+/* ---------- Transactions section ---------- */
+
+.transactions-section {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.transactions-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.transactions-toolbar h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.transactions-toolbar .toolbar-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.search-input {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  min-width: 220px;
+  flex: 1 1 220px;
+  max-width: 320px;
+  background-color: #fff;
+  color: var(--text-primary);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--slate);
+  box-shadow: 0 0 0 3px rgba(58, 67, 94, 0.15);
+}
+
+.sort-select {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background-color: #fff;
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+/* ---------- Table ---------- */
+
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transactions-table th {
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.transactions-table td {
+  padding: 0.85rem 1.5rem;
+  font-size: 0.92rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.transactions-table tr:last-child td {
+  border-bottom: none;
+}
+
+.transactions-table tbody tr:hover {
+  background-color: var(--bg);
+}
+
+.transactions-table th.col-amount,
+.transactions-table td.col-amount {
+  text-align: right;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.amount-positive {
+  color: var(--positive);
+  font-weight: 600;
+}
+
+.amount-negative {
+  color: var(--negative);
+  font-weight: 600;
+}
+
+.empty-state {
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
 }
