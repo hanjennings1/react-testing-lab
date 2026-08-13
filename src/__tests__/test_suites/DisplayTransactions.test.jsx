@@ -3,7 +3,7 @@ import AccountContainer from '../../components/AccountContainer';
 
 describe("Display Transactions", () => {
 
-  // BASE CASE: confirms transactions fetched on mount actually render
+// BASE CASE: confirms transactions fetched on mount actually render
   test("renders transactions fetched on startup", async () => {
     // Mock a successful fetch response with one transaction
     global.setFetchResponse([
@@ -23,7 +23,8 @@ describe("Display Transactions", () => {
     expect(transaction).toBeInTheDocument();
   });
 
-  // EDGE CASE: confirms multiple transactions all render, not just one
+
+// EDGE CASE: confirms multiple transactions all render, not just one
   test("renders multiple transactions fetched on startup", async () => {
     // Mock a successful fetch response with two transactions
     global.setFetchResponse([
@@ -52,9 +53,12 @@ describe("Display Transactions", () => {
     expect(transaction2).toBeInTheDocument();
   });
 
-  // FAILURE CASE: confirms the app doesn't crash or show data if fetch fails
+
+// FAILURE CASE: confirms the app doesn't crash or show data if fetch fails
   test("does not render transactions if fetch fails", async () => {
-    // Override fetch to simulate a rejected/failed network request
+    // Override fetch to simulate a rejected/failed network request.
+    // Note: AccountContainer.jsx has a .catch() on this fetch chain
+    // (added to prevent an unhandled promise rejection during this test)
     global.fetch = vi.fn(() => Promise.reject(new Error("Failed to fetch")));
 
     render(<AccountContainer />);
