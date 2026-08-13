@@ -1,95 +1,76 @@
-# Lab: Testing using Vitest
+# The Royal Bank of Flatiron
 
-## Overview
-Now that you have covered creating a testing suite, we can use the key principles of test-driven development to work with an existing app. Normally, you would build the testing while developing, but you were recently brought onto this project to add a testing suite! You are working to implement a testing suite for a banking application that allows users to track their expenditures by submitting and searching through them.
+A simple personal finance tracker built with React and a JSON server backend. Users can view recent transactions, add new ones, search by description, and sort the list by category or description.
 
-## Task 1: Define the Problem
-- Build a testing suite for an existing application.
+![Screenshot of The Royal Bank of Flatiron transaction dashboard](./public/testing-lab-screenshot.png)
 
-## Task 2: Determine the Design
-- Identify the key features of this project.
+## Features
 
-## Task 3: Develop the Code
-- One feature needs to be completed: the search functionality.
+- **View transactions** — all recent transactions load automatically on startup, showing date, description, category, and amount.
+- **Add a transaction** — submit a new transaction through a form; it's saved to the backend and appears in the list immediately.
+- **Search transactions** — filter the visible list in real time by typing a description.
+- **Sort transactions** — reorder the list alphabetically by description or category.
 
-## Task 4: Test and Refine
-- Build a test suite using Vitest to test key features:
-  - Display transactions
-  - Add transactions
-  - Search transactions and sort transactions
+## Tech Stack
 
-## Task 5: Document and Maintain
-- Commit as you go, writing meaningful commit messages.
-- Push commit history to GitHub periodically and when the lab is complete.
+- [React](https://react.dev/) (via [Vite](https://vitejs.dev/))
+- [json-server](https://github.com/typicode/json-server) as a mock REST backend
+- [Vitest](https://vitest.dev/) + [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for testing
 
-## Tools and Resources
-- Vitest: [Vitest Documentation](https://vitest.dev/guide/)
+## Getting Started
 
-## Instructions
+### Installation
 
-### Set Up
-Before we begin coding, let's complete the initial setup for this lesson:
+Clone the repository and install dependencies:
 
-#### Fork and Clone
-1. Go to the provided GitHub repository link.
-2. Fork the repository to your GitHub account.
-3. Clone the forked repository to your local machine.
+    git clone https://github.com/hanjennings1/react-testing-lab
+    cd react-testing-lab
+    npm install
 
-#### Open and Run File
-1. Open the project in VSCode.
-2. Run `npm install` to install all necessary dependencies.
+### Running the App
 
-### Instructions
-#### Task 1: Define the Problem
-- Build a testing suite for an existing application.
+The app requires both the frontend and the backend server running at the same time, in two separate terminals:
 
-#### Task 2: Determine the Design
-- Identify the key features of this project.
+    npm run dev      # starts the React app
+    npm run server   # starts the json-server backend on port 6001
 
-#### Task 3: Develop, Test, and Refine the Code
+Then open the app at the local address shown in your terminal (typically `http://localhost:5173`).
 
-1. Open the React application in the browser:
-   ```sh
-   npm run dev
-   ```
-2. Run the included backend:
-   ```sh
-   npm run server
-   ```
-3. Create a test branch.
+## Testing
 
-#### Display Transactions Test
-- Create a test suite that will test if transactions are displayed on startup.
+This project uses [Vitest](https://vitest.dev/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) for unit and integration testing.
 
-#### Add Transactions Test
-- Create a test suite that will test:
-  - If new transactions are added to the frontend.
-  - If a POST request was called.
+    npm test
 
-#### Search Transactions and Sort Transactions Test
-- Create a test suite that will test:
-  - If a change event is triggered, the page updates accordingly.
-  - Search is incomplete, so build out the search functionality based on the test.
+Test coverage includes:
 
-4. Push the feature branch and open a PR on GitHub.
-5. Merge to `main`.
+- **Display Transactions** — transactions render correctly on startup, including multiple transactions, and the app doesn't crash if the fetch fails.
+- **Add Transactions** — new transactions are added to the UI, the correct `POST` request is made, existing transactions aren't lost when a new one is added, and the app handles a failed submission gracefully.
+- **Search & Sort** — the transaction list filters correctly as the user types, resets when the search is cleared, shows an empty state when there are no matches, and sorts correctly by description.
 
-### Task 4: Document and Maintain
-#### Best Practice Documentation Steps:
-- Add comments to the code to explain purpose and logic.
-- Clarify intent/functionality of code for other developers.
-- Add screenshots of completed work included in Markdown in `README.md`.
-- Update `README.md` to reflect the functionality of the application following [Make a README](https://makeareadme.com).
-- Delete any stale branches on GitHub.
-- Remove unnecessary/commented-out code.
-- If needed, update `.gitignore` to remove sensitive data.
+Test suites live in `src/__tests__/test_suites/`.
 
-### Submission
-- Once the test suite is built, submit the link to the GitHub repository on Canvas.
+## Project Structure
 
-### Grading Criteria
-- The application has test suites.
-- The application tests if transactions display on load.
-- The application tests if a new transaction can be added.
-- The application tests if search functionality updates the page correctly.
+    src/
+    ├── __tests__/
+    │   ├── setup.jsx
+    │   ├── App.test.jsx
+    │   └── test_suites/
+    │       ├── DisplayTransactions.test.jsx
+    │       ├── AddTransactions.test.jsx
+    │       └── SearchSort.test.jsx
+    ├── components/
+    │   ├── App.jsx
+    │   ├── AccountContainer.jsx
+    │   ├── AddTransactionForm.jsx
+    │   ├── Search.jsx
+    │   ├── Sort.jsx
+    │   ├── Transaction.jsx
+    │   └── TransactionsList.jsx
+    ├── index.css
+    └── main.jsx
 
+## License
+
+This project was built as part of a Flatiron School coursework lab and is intended for educational purposes.

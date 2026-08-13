@@ -90,6 +90,13 @@
       "description": "",
       "category": "",
       "amount": ""
+    },
+    {
+      "id": "b857",
+      "date": "2026-08-09",
+      "description": "Hotel, 2 Nights",
+      "category": "Entertainment",
+      "amount": "-735.00"
     }
   ]
 }
