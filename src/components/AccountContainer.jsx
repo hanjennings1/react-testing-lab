@@ -42,12 +42,23 @@ function AccountContainer() {
   )
 
   return (
-    <div>
-      <Search setSearch={setSearch}/>
-      <AddTransactionForm postTransaction={postTransaction}/>
-      <Sort onSort={onSort}/>
-      <TransactionsList transactions={filteredTransactions} />
-    </div>
+    <main className="app-content">
+      <section className="add-transaction-card">
+        <h3>Add a Transaction</h3>
+        <AddTransactionForm postTransaction={postTransaction}/>
+      </section>
+
+      <section className="transactions-section">
+        <div className="transactions-toolbar">
+          <h3>Recent Transactions</h3>
+          <div className="toolbar-controls">
+            <Search setSearch={setSearch}/>
+            <Sort onSort={onSort}/>
+          </div>
+        </div>
+        <TransactionsList transactions={filteredTransactions} />
+      </section>
+    </main>
   );
 }
 

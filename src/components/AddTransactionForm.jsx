@@ -13,19 +13,29 @@ function AddTransactionForm({postTransaction}) {
   }
 
   return (
-    <div className="ui segment">
-      <form className="ui form" onSubmit={(e)=>{submitForm(e)}}>
-        <div className="inline fields">
-          <input type="date" name="date" />
-          <input type="text" name="description" placeholder="Description" />
-          <input type="text" name="category" placeholder="Category" />
-          <input type="number" name="amount" placeholder="Amount" step="0.01" />
+    <form className="add-transaction-form" onSubmit={(e)=>{submitForm(e)}}>
+      <div className="form-fields">
+        <div className="field">
+          <label htmlFor="date">Date</label>
+          <input id="date" type="date" name="date" />
         </div>
-        <button className="ui button" type="submit">
-          Add Transaction
-        </button>
-      </form>
-    </div>
+        <div className="field">
+          <label htmlFor="description">Description</label>
+          <input id="description" type="text" name="description" placeholder="Description" />
+        </div>
+        <div className="field">
+          <label htmlFor="category">Category</label>
+          <input id="category" type="text" name="category" placeholder="Category" />
+        </div>
+        <div className="field">
+          <label htmlFor="amount">Amount</label>
+          <input id="amount" type="number" name="amount" placeholder="Amount" step="0.01" />
+        </div>
+      </div>
+      <button className="btn-primary" type="submit">
+        Add Transaction
+      </button>
+    </form>
   );
 }
 

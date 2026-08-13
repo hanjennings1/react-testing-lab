@@ -2,29 +2,25 @@ import React from "react";
 import Transaction from "./Transaction";
 
 function TransactionsList({transactions}) {
+  if (transactions.length === 0) {
+    return <p className="empty-state">No transactions to show.</p>;
+  }
+
   const transactionComponent = transactions.map((transaction)=>{
     return <Transaction key={transaction.id} transaction={transaction}/>
   })
+
   return (
-    <table className="ui celled striped padded table">
-      <tbody>
+    <table className="transactions-table">
+      <thead>
         <tr>
-          <th>
-            <h3 className="ui center aligned header">Date</h3>
-          </th>
-          <th>
-            <h3 className="ui center aligned header">Description</h3>
-          </th>
-          <th>
-            <h3 className="ui center aligned header">Category</h3>
-          </th>
-          <th>
-            <h3 className="ui center aligned header">Amount</h3>
-          </th>
-          <th>
-            <h3 className="ui center aligned header">DELETE</h3>
-          </th>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Category</th>
+          <th className="col-amount">Amount</th>
         </tr>
+      </thead>
+      <tbody>
         {transactionComponent}
       </tbody>
     </table>
